@@ -1,8 +1,8 @@
 class RoomsController < ApplicationController
   before_action :find_room_by_id, only: [:show, :edit, :update]
+  before_action :return_all_rooms, only: [:index, :show]
 
   def index
-    @rooms = Room.all
   end
 
   def new
@@ -41,6 +41,10 @@ class RoomsController < ApplicationController
 
   def find_room_by_id
     @room = Room.find(params[:id]) if params[:id]
+  end
+
+  def return_all_rooms 
+    @rooms = Room.all
   end
 
   def permitted_parameters
