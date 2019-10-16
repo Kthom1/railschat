@@ -37,9 +37,16 @@ Save the change then run
 
 ```bash
 rails db:create
+rails db:schema:load
 ```
 
 ### 2. Run the application
+
+In the app directory run
+
+```bash
+bundle exec guard
+```
 
 In a separate terminal, in the app directory, run
 
