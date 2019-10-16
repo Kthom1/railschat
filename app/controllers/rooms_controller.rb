@@ -1,5 +1,5 @@
 class RoomsController < ApplicationController
-  before_action :find_room_by_id, only: [:show, :edit, :update]
+  before_action :find_room_by_id, only: [:show, :edit, :update, :destroy]
   before_action :return_all_rooms, only: [:index, :show]
 
   def index
@@ -13,7 +13,7 @@ class RoomsController < ApplicationController
     @room = Room.new permitted_parameters
 
     if @room.save
-      flash[:success] = "Room #{@room.name} was created successfully"
+      flash[:success] = "Room #{@room.name} was successfully created."
       redirect_to rooms_path
     else
       render :new
@@ -30,11 +30,17 @@ class RoomsController < ApplicationController
 
   def update
     if @room.update_attributes(permitted_parameters)
-      flash[:success] = "Room #{@room.name} was updated successfully"
+      flash[:success] = "Room #{@room.name} was successfully updated."
       redirect_to rooms_path
     else
       render :new
     end
+  end
+
+  def destroy
+    @room.destroy
+    flash[:success] = "Room #{@room.name} was successfully deleted."
+    redirect_to rooms_path
   end
 
   protected
